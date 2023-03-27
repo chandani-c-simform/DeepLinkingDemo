@@ -1,30 +1,25 @@
-import {Button, StyleSheet, Text, View, Linking} from 'react-native';
 import React from 'react';
+import {View} from 'react-native';
+import {Product} from '../../components';
+import {products} from '../../constants';
+import styles from './LinkingScreenStyles';
+import {LinkingScreenProps} from './LinkingScreenTypes';
 
-const LinkingScreen = () => {
-  const URL_Home = 'RNDeepLink://home';
-  const URL_Deatil = 'RNDeepLink://details';
-
+const LinkingScreen = ({navigation}: LinkingScreenProps) => {
   return (
     <View style={styles.container}>
-      <Text>LinkingScreen</Text>
-      <Button
-        title="go to homescreen"
-        onPress={() => Linking.openURL(URL_Home)}
-      />
-      <Button
-        title="go to detailsScreen"
-        onPress={() => Linking.openURL(URL_Deatil)}
-      />
+      <View style={styles.container}>
+        {products.map(product => (
+          <Product
+            key={product.name}
+            name={product.name}
+            image={product.image}
+            price={product.price}
+            navigation={navigation}
+          />
+        ))}
+      </View>
     </View>
   );
 };
-
 export default LinkingScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lilac',
-  },
-});
